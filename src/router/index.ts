@@ -1,7 +1,8 @@
-import { Application, Router } from "express";
+import { Application, Router, Request, Response, NextFunction } from "express";
 import { ServerStatusRouter } from "../components";
 
-const routes = [["server-status", ServerStatusRouter]];
+type Route = [string, Router];
+const routes: Route[] = [["server-status", ServerStatusRouter]];
 
 const setRoutes = (app: Application) => {
   const router = Router();
@@ -9,7 +10,19 @@ const setRoutes = (app: Application) => {
   app.use("/api/v1", router);
 
   routes.forEach(([path, route]) => {
-    router.use(`/${path}`, route as Router);
+    router.use(`/${path}`, route);
+  });
+
+  // Handle unknown routes
+  app.use((req: Request, res: Response) => {
+    res.status(404).json({ message: "Route not found" });
+  });
+
+  // Error handling middleware
+  app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    console.error(err.stack);
+    res.status(500).json({ message: "Internal Server Error" });
+    next(err);
   });
 };
 
