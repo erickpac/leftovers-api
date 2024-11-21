@@ -15,7 +15,7 @@ yarn-error.log*
 dist/
 
 # Environment variables
-.env*
+.env
 
 # IDEs and editors
 .vscode/
