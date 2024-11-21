@@ -2,7 +2,9 @@
   "name": "my-express-app",
   "version": "1.0.0",
   "description": "A simple Express application scaffolded with TypeScript.",
+  "author": "Erick Pac",
   "main": "dist/app.js",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "start": "node dist/app.js",
@@ -30,6 +32,5 @@
   },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "license": "MIT"
+  }
 }
