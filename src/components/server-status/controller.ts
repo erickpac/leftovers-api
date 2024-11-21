@@ -6,5 +6,5 @@ export const getServerStatus = (req: Request, res: Response) => {
     timestamp: new Date(),
   };
 
-  res.json(status);
+  res.status(200).json(status);
 };
