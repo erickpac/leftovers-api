@@ -1,4 +1,4 @@
-import { Application, Router, Request, Response, NextFunction } from "express";
+import { Application, Router } from "express";
 import { ServerStatusRouter } from "../components";
 
 type Route = [string, Router];
