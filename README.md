@@ -6,8 +6,7 @@ API for the food waste reduction app, providing endpoints for managing store pos
 
 ```
 left-lovers-api
-├── database                    # Contains database configuration and setup files
-│   └── index.ts                # Initializes and configures the database connection
+
 ├── prisma                      # Prisma ORM configuration and related files
 │   ├── migrations              # Stores database migration files
 │   ├── schema.prisma           # Defines the Prisma schema for the database
@@ -22,6 +21,8 @@ left-lovers-api
 │   │   │   ├── controller.ts   # Contains the logic for a specific component
 │   │   │   ├── index.ts        # Exports component routes
 │   │   │   └── network.ts      # Sets up component routes
+│   ├── database                # Contains database configuration and setup files
+│   │   └── index.ts            # Initializes and configures the database connection
 │   ├── router                  # Contains route definitions
 │   │   └── index.ts            # Main router setup
 │   └── types                   # Custom TypeScript types
