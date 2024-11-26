@@ -1,19 +1,19 @@
-export function getCurrentPageNumber(page: string): number {
+export const getCurrentPageNumber = (page: string): number => {
   return page ? Number(page) : 1;
-}
+};
 
-export function getTotalPages(
+export const getTotalPages = (
   totalItems: number,
   itemsPerPage: number = 20,
-): number {
+): number => {
   return Math.ceil(totalItems / itemsPerPage);
-}
+};
 
-export function getNextPageUrl(
+export const getNextPageUrl = (
   currentPage: number,
   totalPages: number,
   endpoint: string = "stores",
-): string | null {
+): string | null => {
   if (currentPage < 1 || currentPage >= totalPages) {
     return null;
   }
@@ -21,13 +21,13 @@ export function getNextPageUrl(
   return `${process.env.CURRENT_URL}/api/${
     process.env.API_VERSION as string
   }/${endpoint}?page=${currentPage + 1}` as string;
-}
+};
 
-export function getPreviousPageUrl(
+export const getPreviousPageUrl = (
   currentPage: number,
   totalPages: number,
   endpoint: string = "stores",
-): string | null {
+): string | null => {
   if (currentPage <= 1 || currentPage > totalPages) {
     return null;
   }
@@ -35,13 +35,13 @@ export function getPreviousPageUrl(
   return `${process.env.CURRENT_URL}/api/${
     process.env.API_VERSION as string
   }/${endpoint}?page=${currentPage - 1}` as string;
-}
+};
 
-export function calculatePagination(
+export const calculatePagination = (
   queryPage: string,
   totalItems: number,
   endpoint: string = "stores",
-) {
+) => {
   try {
     const currentPage = getCurrentPageNumber(queryPage);
     if (totalItems === 0) throw new Error("No items found");
@@ -66,4 +66,4 @@ export function calculatePagination(
       message: (error as Error).message,
     };
   }
-}
+};
