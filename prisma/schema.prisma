@@ -20,8 +20,8 @@ model User {
   password      String
   role          Role           @default(CUSTOMER)
   createdAt     DateTime       @default(now())
-  stores        Store[] // Relation
-  orders        Order[] // Relation
+  stores        Store[]
+  orders        Order[]
   notifications Notification[]
   favorites     Favorite[]
   reviews       Review[]
