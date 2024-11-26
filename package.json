@@ -1,7 +1,7 @@
 {
-  "name": "leftlovers-market",
+  "name": "leftovers-market-api",
   "version": "1.0.0",
-  "description": "A simple Express application scaffolded with TypeScript.",
+  "description": "API for the food waste reduction app",
   "author": "Erick Pac",
   "main": "dist/app.js",
   "license": "MIT",
