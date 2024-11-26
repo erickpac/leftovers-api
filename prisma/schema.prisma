@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  name          String
+  email         String         @unique
+  password      String
+  role          Role           @default(CUSTOMER)
+  createdAt     DateTime       @default(now())
+  stores        Store[] // Relation
+  orders        Order[] // Relation
+  notifications Notification[]
+  favorites     Favorite[]
+  reviews       Review[]
+}
+
+model Store {
+  id           Int             @id @default(autoincrement())
+  owner        User            @relation(fields: [ownerId], references: [id])
+  ownerId      Int
+  name         String
+  description  String?
+  address      String
+  latitude     Float?
+  longitude    Float?
+  contactEmail String?
+  contactPhone String?
+  createdAt    DateTime        @default(now())
+  foodItems    FoodItem[]
+  reviews      Review[]
+  favorites    Favorite[]
+  categories   StoreCategory[]
+}
+
+model FoodItem {
+  id            Int      @id @default(autoincrement())
+  store         Store    @relation(fields: [storeId], references: [id])
+  storeId       Int
+  name          String
+  description   String?
+  price         Float
+  originalPrice Float?
+  quantity      Int      @default(1)
+  pickupStart   DateTime
+  pickupEnd     DateTime
+  createdAt     DateTime @default(now())
+  orders        Order[]
+}
+
+model Order {
+  id         Int         @id @default(autoincrement())
+  user       User        @relation(fields: [userId], references: [id])
+  userId     Int
+  foodItem   FoodItem    @relation(fields: [foodItemId], references: [id])
+  foodItemId Int
+  quantity   Int         @default(1)
+  totalPrice Float
+  status     OrderStatus @default(PENDING)
+  orderTime  DateTime    @default(now())
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Favorite {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  store     Store    @relation(fields: [storeId], references: [id])
+  storeId   Int
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  store     Store    @relation(fields: [storeId], references: [id])
+  storeId   Int
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id              Int             @id @default(autoincrement())
+  name            String          @unique
+  createdAt       DateTime        @default(now())
+  storeCategories StoreCategory[]
+}
+
+model StoreCategory {
+  id         Int      @id @default(autoincrement())
+  store      Store    @relation(fields: [storeId], references: [id])
+  storeId    Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+
+  @@unique([storeId, categoryId])
+}
+
+enum Role {
+  CUSTOMER
+  STORE_OWNER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
