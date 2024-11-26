@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 
-import ErrorResponse from "./types/error-response";
+import ErrorResponse from "@/types/error-response";
 
 export const notFound = (req: Request, res: Response, next: NextFunction) => {
   const error = new Error(`🔍 - not found - ${req.originalUrl}`);
