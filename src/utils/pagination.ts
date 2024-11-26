@@ -1,0 +1,69 @@
+export function getCurrentPageNumber(page: string): number {
+  return page ? Number(page) : 1;
+}
+
+export function getTotalPages(
+  totalItems: number,
+  itemsPerPage: number = 20,
+): number {
+  return Math.ceil(totalItems / itemsPerPage);
+}
+
+export function getNextPageUrl(
+  currentPage: number,
+  totalPages: number,
+  endpoint: string = "stores",
+): string | null {
+  if (currentPage < 1 || currentPage >= totalPages) {
+    return null;
+  }
+
+  return `${process.env.CURRENT_URL}/api/${
+    process.env.API_VERSION as string
+  }/${endpoint}?page=${currentPage + 1}` as string;
+}
+
+export function getPreviousPageUrl(
+  currentPage: number,
+  totalPages: number,
+  endpoint: string = "stores",
+): string | null {
+  if (currentPage <= 1 || currentPage > totalPages) {
+    return null;
+  }
+
+  return `${process.env.CURRENT_URL}/api/${
+    process.env.API_VERSION as string
+  }/${endpoint}?page=${currentPage - 1}` as string;
+}
+
+export function calculatePagination(
+  queryPage: string,
+  totalItems: number,
+  endpoint: string = "stores",
+) {
+  try {
+    const currentPage = getCurrentPageNumber(queryPage);
+    if (totalItems === 0) throw new Error("No items found");
+
+    const totalPages = getTotalPages(totalItems);
+    if (currentPage < 1 || currentPage > totalPages)
+      throw new Error("Invalid page number");
+
+    return {
+      success: true,
+      data: {
+        totalItems,
+        currentPage,
+        totalPages,
+        nextPageUrl: getNextPageUrl(currentPage, totalPages, endpoint),
+        previousPageUrl: getPreviousPageUrl(currentPage, totalPages, endpoint),
+      },
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: (error as Error).message,
+    };
+  }
+}
