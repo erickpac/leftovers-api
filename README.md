@@ -1,11 +1,11 @@
-# LeftLovers Market API
+# Leftovers Market API
 
 API for the food waste reduction app, providing endpoints for managing store posts, real-time inventory updates, and location-based food search.
 
 ## Project Structure
 
 ```
-left-lovers-api
+leftovers-api
 
 ├── prisma                      # Prisma ORM configuration and related files
 │   ├── migrations              # Stores database migration files
