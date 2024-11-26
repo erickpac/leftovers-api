@@ -52,7 +52,7 @@ yarn dev
 
 ### Run Prisma Migrations
 
-After defining the schema, run the following commands to generate the migrations and apply them to your database:
+Run the following commands to generate the migrations and apply them to your database:
 
 ```
 npx prisma migrate dev --name init
