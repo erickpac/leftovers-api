@@ -1,8 +1,11 @@
 import { Application, Router } from "express";
-import { StoresRouter } from "@/components";
+import { StoresRouter, UsersRouter } from "@/components";
 
 type Route = [string, Router];
-const routes: Route[] = [["stores", StoresRouter]];
+const routes: Route[] = [
+  ["stores", StoresRouter],
+  ["users", UsersRouter],
+];
 
 const setRoutes = (app: Application) => {
   const router = Router();
