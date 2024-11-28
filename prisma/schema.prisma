@@ -19,8 +19,8 @@ model User {
   email       String?   @unique
   password    String?
   role        Role      @default(CUSTOMER)
-  ssoProvider String? // e.g., "google", "apple" (null for admin/store users)
-  ssoId       String?   @unique // Unique identifier from the SSO provider
+  ssoProvider String?
+  ssoId       String?   @unique
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
