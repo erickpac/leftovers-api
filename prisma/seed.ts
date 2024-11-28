@@ -1,4 +1,4 @@
-import prisma from "../src/database";
+import prisma from "../src/database/client";
 
 async function main() {
   // Seed Users

@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import prisma from "@/database";
+import prisma from "@/database/client";
 
 export const getStores = async (req: Request, res: Response) => {
   const stores = await prisma.store.findMany({

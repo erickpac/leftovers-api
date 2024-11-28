@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import prisma from "@/database";
+import prisma from "@/database/client";
 import { sendSuccessResponse, sendErrorResponse } from "@/common/responses";
 
 export const getUsers = async (req: Request, res: Response) => {
