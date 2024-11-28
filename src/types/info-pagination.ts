@@ -1,6 +1,7 @@
 export default interface InfoPagination {
-  count: number;
-  page: number;
-  next: string | null;
-  prev: string | null;
+  totalItems: number;
+  currentPage: number;
+  totalPages: number;
+  nextPageUrl: string | null;
+  previousPageUrl: string | null;
 }
