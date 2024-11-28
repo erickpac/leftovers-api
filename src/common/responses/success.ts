@@ -1,7 +1,7 @@
 import SuccessResponse from "@/types/success-response";
 import type { Response } from "express";
 
-export const success = ({
+const success = ({
   res,
   status = 200,
   info,
@@ -10,5 +10,8 @@ export const success = ({
   if (info) {
     return res.status(status).json({ info, results: data });
   }
+
   return res.status(status).json({ results: data });
 };
+
+export default success;
