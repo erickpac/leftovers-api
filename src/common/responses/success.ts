@@ -1,7 +1,7 @@
 import SuccessResponse from "@/types/success-response";
 import type { Response } from "express";
 
-const sendSuccessResponse = ({
+const success = ({
   res,
   status = 200,
   info,
@@ -14,4 +14,4 @@ const sendSuccessResponse = ({
   return res.status(status).json({ results: data });
 };
 
-export default sendSuccessResponse;
+export default success;

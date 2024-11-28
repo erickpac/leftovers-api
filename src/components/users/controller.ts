@@ -1,7 +1,6 @@
 import type { Request, Response } from "express";
 import prisma from "@/database";
-import sendSuccessResponse from "@/common/responses/success";
-import sendErrorResponse from "@/common/responses/error";
+import { sendSuccessResponse, sendErrorResponse } from "@/common/responses";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
