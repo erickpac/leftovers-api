@@ -9,6 +9,8 @@ export const getUsers = async (req: Request, res: Response) => {
 
     success({ res, data: users });
   } catch (err) {
-    error({ res, message: err as string });
+    const errorMessage =
+      err instanceof Error ? err.message : "An unknown error occurred";
+    error({ res, message: errorMessage });
   }
 };
