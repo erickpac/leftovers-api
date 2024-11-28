@@ -14,12 +14,18 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
-  name          String
-  email         String         @unique
-  password      String
-  role          Role           @default(CUSTOMER)
-  createdAt     DateTime       @default(now())
+  id          Int       @id @default(autoincrement())
+  name        String
+  email       String?   @unique
+  password    String?
+  role        Role      @default(CUSTOMER)
+  ssoProvider String?
+  ssoId       String?   @unique
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  // Relationships
   stores        Store[]
   orders        Order[]
   notifications Notification[]

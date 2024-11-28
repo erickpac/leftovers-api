@@ -55,7 +55,23 @@ yarn dev
 Run the following commands to generate the migrations and apply them to your database:
 
 ```
-npx prisma migrate dev --name init
+npx prisma migrate dev --name migration_name
+```
+
+### Apply the New Migration
+
+If you don’t want to reset the database but still apply the latest migration, run:
+
+```
+npx prisma migrate deploy
+```
+
+### Reset the Database (Optional)
+
+If you want to completely reset the database (including seeding), you can use the following command:
+
+```
+npx prisma migrate reset
 ```
 
 ### Generate Prisma Client
