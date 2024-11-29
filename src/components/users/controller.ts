@@ -8,8 +8,9 @@ export const getUsers = async (req: Request, res: Response) => {
 
     sendSuccessResponse({ res, data: users });
   } catch (error) {
-    const errorMessage =
+    const message =
       error instanceof Error ? error.message : "An unknown error occurred";
-    sendErrorResponse({ res, message: errorMessage });
+
+    sendErrorResponse({ res, message });
   }
 };
