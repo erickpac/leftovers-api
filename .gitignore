@@ -28,3 +28,6 @@ dist/
 # Miscellaneous
 *.bak
 *.tmp
+
+# Jest
+coverage/

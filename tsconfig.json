@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "noImplicitAny": true,
+    "resolveJsonModule": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": "./src",
@@ -15,6 +16,6 @@
       "@/*": ["*"]
     }
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["src/**/*", "**/*.test.ts", "**/*.spec.ts"],
+  "exclude": ["node_modules"]
 }

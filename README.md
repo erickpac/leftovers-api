@@ -90,6 +90,16 @@ Run the seeding script using Prisma:
 npx prisma db seed
 ```
 
+## Tests (Jest)
+
+### Run tests
+
+To run the tests, use the following command:
+
+```
+yarn test
+```
+
 ## License
 
 This project is licensed under the MIT License.
