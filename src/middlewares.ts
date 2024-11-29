@@ -1,6 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-
-import ErrorResponse from "@/types/error-response";
+import { sendErrorResponse } from "@/common/responses";
 
 export const notFound = (req: Request, res: Response, next: NextFunction) => {
   const error = new Error(`🔍 - not found - ${req.originalUrl}`);
@@ -11,14 +10,12 @@ export const notFound = (req: Request, res: Response, next: NextFunction) => {
 export const errorHandler = (
   err: Error,
   req: Request,
-  res: Response<ErrorResponse>,
+  res: Response,
   next: NextFunction,
 ) => {
   const statusCode =
     res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
-  res.status(statusCode).json({
-    res,
-    message: err.message,
-    stack: process.env.NODE_ENV === "production" ? undefined : err.stack,
-  });
+  const stack = process.env.NODE_ENV === "production" ? undefined : err.stack;
+
+  sendErrorResponse({ res, statusCode, message: err.message, stack });
 };

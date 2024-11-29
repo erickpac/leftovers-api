@@ -3,6 +3,6 @@ import MessageResponse from "./message-response";
 
 export default interface ErrorResponse extends MessageResponse {
   res: Response;
-  status?: number;
+  statusCode?: number;
   stack?: string;
 }
