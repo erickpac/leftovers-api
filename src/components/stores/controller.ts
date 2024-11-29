@@ -1,10 +1,10 @@
 import type { Request, Response } from "express";
-import { getAllStores } from "./service";
+import * as service from "./service";
 import { sendSuccessResponse, sendErrorResponse } from "@/common/responses";
 
 export const getStores = async (req: Request, res: Response) => {
   try {
-    const stores = await getAllStores();
+    const stores = await service.getAllStores();
 
     sendSuccessResponse({ res, data: stores });
   } catch (error) {

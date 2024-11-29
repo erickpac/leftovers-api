@@ -1,10 +1,10 @@
 import type { Request, Response } from "express";
-import { getAllUsers } from "./service";
+import * as service from "./service";
 import { sendSuccessResponse, sendErrorResponse } from "@/common/responses";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
-    const users = await getAllUsers();
+    const users = await service.getAllUsers();
 
     sendSuccessResponse({ res, data: users });
   } catch (error) {
