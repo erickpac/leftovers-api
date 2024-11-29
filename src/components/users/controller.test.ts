@@ -1,6 +1,6 @@
 import request from "supertest";
 import express from "express";
-import { getUsers } from "./controller";
+import * as UserController from "./controller";
 import { getAllUsers } from "@/components/users/service";
 import { sendSuccessResponse, sendErrorResponse } from "@/common/responses";
 
@@ -8,9 +8,9 @@ jest.mock("@/components/users/service");
 jest.mock("@/common/responses");
 
 const app = express();
-app.get("/users", getUsers);
+app.get("/users", UserController.getUsers);
 
-describe("Users controller", () => {
+describe("UserController", () => {
   describe("GET /users", () => {
     const mockUsers = [{ id: 1, name: "John Doe" }];
     const errorMessage = "An error occurred";
