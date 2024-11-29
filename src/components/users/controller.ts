@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { getAllUsers } from "@/components/users/service";
+import { getAllUsers } from "./service";
 import { sendSuccessResponse, sendErrorResponse } from "@/common/responses";
 
 export const getUsers = async (req: Request, res: Response) => {

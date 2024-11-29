@@ -1,10 +1,16 @@
 import type { Request, Response } from "express";
-import prisma from "@/database/client";
+import { getAllStores } from "./service";
+import { sendSuccessResponse, sendErrorResponse } from "@/common/responses";
 
 export const getStores = async (req: Request, res: Response) => {
-  const stores = await prisma.store.findMany({
-    include: { categories: true, foodItems: true },
-  });
+  try {
+    const stores = await getAllStores();
 
-  res.status(200).json(stores);
+    sendSuccessResponse({ res, data: stores });
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "An unknown error occurred";
+
+    sendErrorResponse({ res, message });
+  }
 };
