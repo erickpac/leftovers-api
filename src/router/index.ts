@@ -7,6 +7,14 @@ const routes: Route[] = [
   ["users", UsersRouter],
 ];
 
+/**
+ * Sets up the application routes.
+ *
+ * This function initializes a new router, mounts it on the `/api/v1` path,
+ * and iterates over the `routes` array to register each route with the router.
+ *
+ * @param {Application} app - The Express application instance.
+ */
 const setRoutes = (app: Application) => {
   const router = Router();
 
