@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { sendErrorResponse } from "@/common/responses";
+import { verifyToken } from "@/utils/auth";
 
 /**
  * Middleware to handle requests to routes that are not found.
@@ -49,4 +50,22 @@ export const errorHandler = (
   const stack = process.env.NODE_ENV === "production" ? undefined : err.stack;
 
   sendErrorResponse({ res, statusCode, message: err.message, stack });
+};
+
+export const authenticate = (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token) return sendErrorResponse({ res, statusCode: 401, message: 'No token provided' })
+
+  try {
+    const decoded = verifyToken(token);
+    if (typeof decoded !== 'string' && 'id' in decoded) {
+      req.userId = decoded.id;
+      next();
+    } else {
+      return sendErrorResponse({ res, statusCode: 401, message: 'Invalid token' });
+    }
+  } catch (error) {
+    return sendErrorResponse({ res, statusCode: 401, message: 'Invalid token' });
+  }
 };

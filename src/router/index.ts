@@ -1,10 +1,15 @@
 import { Application, Router } from "express";
-import { StoresRouter, UsersRouter } from "@/components";
+import { StoresRouter, UsersRouter, AuthRouter } from "@/components";
+import * as middleware from "@/middlewares";
 
 type Route = [string, Router];
-const routes: Route[] = [
+const protectedRoutes: Route[] = [
   ["stores", StoresRouter],
   ["users", UsersRouter],
+];
+
+const publicRoutes: Route[] = [
+  ["auth", AuthRouter],
 ];
 
 /**
@@ -20,8 +25,12 @@ const setRoutes = (app: Application) => {
 
   app.use("/api/v1", router);
 
-  routes.forEach(([path, route]) => {
+  publicRoutes.forEach(([path, route]) => {
     router.use(`/${path}`, route);
+  });
+
+  protectedRoutes.forEach(([path, route]) => {
+    router.use(`/${path}`, middleware.authenticate, route);
   });
 };
 
