@@ -1,3 +1,5 @@
+import { CURRENT_URL, API_VERSION } from "./config";
+
 const getCurrentPageNumber = (page: string): number => {
   return page ? Number(page) : 1;
 };
@@ -18,8 +20,8 @@ const getNextPageUrl = (
     return null;
   }
 
-  return `${process.env.CURRENT_URL}/api/${
-    process.env.API_VERSION as string
+  return `${CURRENT_URL}/api/${
+    API_VERSION as string
   }/${endpoint}?page=${currentPage + 1}` as string;
 };
 
@@ -32,8 +34,8 @@ const getPreviousPageUrl = (
     return null;
   }
 
-  return `${process.env.CURRENT_URL}/api/${
-    process.env.API_VERSION as string
+  return `${CURRENT_URL}/api/${
+    API_VERSION as string
   }/${endpoint}?page=${currentPage - 1}` as string;
 };
 
