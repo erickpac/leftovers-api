@@ -17,8 +17,8 @@ export const sendSuccessResponse = ({
   data,
 }: SuccessResponse): Response => {
   if (info) {
-    return res.status(status).json({ info, results: data });
+    return res.status(status).json({ info, data });
   }
 
-  return res.status(status).json({ results: data });
+  return res.status(status).json({ data });
 };
