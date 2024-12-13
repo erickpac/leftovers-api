@@ -1,5 +1,5 @@
 import { Application, Router } from "express";
-import { UsersRouter } from "@/components";
+import { UsersRouter } from "@/components/users/network";
 import { StoresRouter } from "@/components/stores/network";
 
 type Route = [string, Router];
