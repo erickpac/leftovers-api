@@ -27,6 +27,7 @@ export const getFoodById = async (req: Request, res: Response) => {
     return sendSuccessResponse({ res, data: foodItem });
   } catch (error) {
     const { message, statusCode } = normalizeError(error);
+
     return sendErrorResponse({ res, message, statusCode });
   }
 };
