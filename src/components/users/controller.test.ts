@@ -2,7 +2,8 @@ import request from "supertest";
 import express from "express";
 import * as controller from "./controller";
 import * as service from "@/components/users/service";
-import { sendSuccessResponse, sendErrorResponse } from "@/common/responses";
+import { sendSuccessResponse } from "@/common/responses/success";
+import { sendErrorResponse } from "@/common/responses/error";
 
 jest.mock("@/components/users/service");
 jest.mock("@/common/responses");
