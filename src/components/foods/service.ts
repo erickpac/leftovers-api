@@ -36,7 +36,7 @@ const getFoodDetails = async (id: number) => {
   });
 
   if (!foodItem) {
-    throw new Error("Food item not found");
+    return null;
   }
 
   const averageRating = getAverageRating(foodItem.store.reviews);

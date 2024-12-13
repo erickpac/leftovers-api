@@ -6,7 +6,8 @@ import { sendSuccessResponse } from "@/common/responses/success";
 import { sendErrorResponse } from "@/common/responses/error";
 
 jest.mock("@/components/users/service");
-jest.mock("@/common/responses");
+jest.mock("@/common/responses/success");
+jest.mock("@/common/responses/error");
 
 const app = express();
 app.get("/users", controller.getUsers);
