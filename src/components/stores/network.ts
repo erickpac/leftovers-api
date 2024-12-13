@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as Controller from "./controller";
 
-export const StoresRouter = Router();
+export const router = Router();
 
-StoresRouter.get("/", Controller.getStores);
+router.get("/", Controller.getStores);
