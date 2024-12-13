@@ -1,5 +1,5 @@
 import prisma from "@/database/client";
 
-export const getAllUsers = async () => {
+export const getUsers = async () => {
   return prisma.user.findMany();
 };

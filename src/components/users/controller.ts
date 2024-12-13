@@ -5,7 +5,7 @@ import { sendSuccessResponse } from "@/common/responses/success";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
-    const users = await service.getAllUsers();
+    const users = await service.getUsers();
 
     sendSuccessResponse({ res, data: users });
   } catch (error) {

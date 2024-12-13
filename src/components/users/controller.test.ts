@@ -18,7 +18,7 @@ describe("UserController", () => {
     const errorMessage = "An error occurred";
 
     it("should return a list of users", async () => {
-      (service.getAllUsers as jest.Mock).mockResolvedValue(mockUsers);
+      (service.getUsers as jest.Mock).mockResolvedValue(mockUsers);
 
       const response = await request(app).get("/users");
 
@@ -27,7 +27,7 @@ describe("UserController", () => {
     });
 
     it("should handle errors", async () => {
-      (service.getAllUsers as jest.Mock).mockRejectedValue(
+      (service.getUsers as jest.Mock).mockRejectedValue(
         new Error(errorMessage),
       );
 
