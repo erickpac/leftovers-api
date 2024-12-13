@@ -49,6 +49,7 @@ model Store {
   reviews      Review[]
   favorites    Favorite[]
   categories   StoreCategory[]
+  highlights   Highlight[]
 }
 
 model FoodItem {
@@ -122,6 +123,15 @@ model StoreCategory {
   categoryId Int
 
   @@unique([storeId, categoryId])
+}
+
+model Highlight {
+  id      Int    @id @default(autoincrement())
+  text    String
+  icon    String
+  votes   Int    @default(0)
+  storeId Int
+  store   Store  @relation(fields: [storeId], references: [id])
 }
 
 enum Role {
