@@ -1,4 +1,4 @@
-import ErrorResponse from "@/types/error-response";
+import { ErrorResponse } from "@/types/error-response";
 import type { Response } from "express";
 
 /**
