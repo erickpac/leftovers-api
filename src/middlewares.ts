@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { sendErrorResponse } from "@/common/responses";
+import { sendErrorResponse } from "@/common/responses/error";
 
 /**
  * Middleware to handle requests to routes that are not found.

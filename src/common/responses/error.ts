@@ -10,7 +10,7 @@ import type { Response } from "express";
  * @param stack - The optional stack trace to be included in the response.
  * @returns The response object with the error details.
  */
-const error = ({
+export const sendErrorResponse = ({
   res,
   statusCode = 500,
   message,
@@ -18,5 +18,3 @@ const error = ({
 }: ErrorResponse): Response => {
   return res.status(statusCode).json({ error: message, stack });
 };
-
-export default error;
