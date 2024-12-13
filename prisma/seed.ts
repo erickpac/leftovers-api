@@ -1,5 +1,11 @@
 import prisma from "../src/database/client";
 
+const predefinedHighlights = [
+  { text: "Friendly staff", icon: "😊" },
+  { text: "Great value", icon: "💰" },
+  { text: "Quick pickup", icon: "⏱️" },
+];
+
 async function main() {
   // Seed Users
   await prisma.user.createMany({
@@ -95,6 +101,14 @@ async function main() {
       rating: 5,
       comment: "Amazing croissants, will buy again!",
     },
+  });
+
+  // Seed Highlights
+  await prisma.highlight.createMany({
+    data: predefinedHighlights.map((highlight) => ({
+      ...highlight,
+      storeId: store.id,
+    })),
   });
 }
 
