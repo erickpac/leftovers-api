@@ -1,6 +1,7 @@
 import { Application, Router } from "express";
 import { router as UsersRouter } from "@/components/users/network";
 import { router as StoresRouter } from "@/components/stores/network";
+import * as middleware from "@/middlewares";
 
 type Route = [string, Router];
 const routes: Route[] = [
@@ -16,14 +17,14 @@ const routes: Route[] = [
  *
  * @param {Application} app - The Express application instance.
  */
-const setRoutes = (app: Application) => {
+export const setRoutes = (app: Application) => {
   const router = Router();
 
   app.use("/api/v1", router);
+  app.use(middleware.notFound);
+  app.use(middleware.errorHandler);
 
   routes.forEach(([path, route]) => {
     router.use(`/${path}`, route);
   });
 };
-
-export default setRoutes;
