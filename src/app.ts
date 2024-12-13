@@ -4,7 +4,6 @@ import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet";
 import { setRoutes } from "@/router";
-import * as middleware from "@/middlewares";
 
 export const app: Application = express();
 
