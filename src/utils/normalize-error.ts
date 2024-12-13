@@ -5,7 +5,7 @@ export const normalizeError = (
 ): { message: string; statusCode: number } => {
   if (error instanceof ZodError) {
     return {
-      message: error.errors.map((err) => err.message).join(", "),
+      message: error.format()._errors.join(", "),
       statusCode: 400,
     };
   }
