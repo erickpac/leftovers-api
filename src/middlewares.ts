@@ -40,10 +40,16 @@ export const notFound = (req: Request, res: Response, next: NextFunction) => {
  * @example
  * app.use(errorHandler);
  */
-export const errorHandler = (err: Error, req: Request, res: Response) => {
+export const errorHandler = (
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   const { message, statusCode, stack } = normalizeError(err);
+  const status = res.statusCode ?? statusCode;
 
-  return sendErrorResponse({ res, message, statusCode, stack });
+  return sendErrorResponse({ res, message, statusCode: status, stack });
 };
 
 /**
