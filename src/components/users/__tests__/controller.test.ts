@@ -8,7 +8,7 @@ jest.mock("../service");
 const app = express();
 app.get("/users", controller.getUsers);
 
-describe("UserController", () => {
+describe("Users Controller", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });

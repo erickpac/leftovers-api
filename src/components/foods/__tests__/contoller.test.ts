@@ -8,7 +8,7 @@ jest.mock("../service");
 const app = express();
 app.get("/foods/:id", controller.getFoodById);
 
-describe("Food Controller", () => {
+describe("Foods Controller", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
