@@ -15,6 +15,7 @@ export const normalizeError = (error: unknown): ErrorObject => {
     return {
       message: error.message,
       statusCode: error.statusCode,
+      stack: NODE_ENV === "production" ? undefined : error.stack,
     };
   }
 
