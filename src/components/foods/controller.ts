@@ -3,17 +3,21 @@ import * as service from "./service";
 import { sendErrorResponse } from "@/common/responses/error";
 import { sendSuccessResponse } from "@/common/responses/success";
 import { normalizeError } from "@/utils/normalize-error";
-import { z } from "zod";
 
 export const getFoodById = async (req: Request, res: Response) => {
   try {
-    const idSchema = z.object({
-      id: z.string().transform((val) => Number(val)),
-    });
+    const { id } = req.params;
+    const parsedId = Number(id);
 
-    const { id } = idSchema.parse(req.params);
+    if (isNaN(parsedId)) {
+      return sendErrorResponse({
+        res,
+        message: "Invalid food ID format",
+        statusCode: 400,
+      });
+    }
 
-    const foodItem = await service.getFoodById(id);
+    const foodItem = await service.getFoodById(parsedId);
 
     if (!foodItem) {
       return sendErrorResponse({
