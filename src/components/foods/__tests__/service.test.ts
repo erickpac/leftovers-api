@@ -7,7 +7,7 @@ jest.mock("@/database/client", () => ({
   },
 }));
 
-describe("getFoodById", () => {
+describe("Food Service", () => {
   it("should return food details with average rating and total reviews", async () => {
     const mockFoodItem = {
       id: 1,
