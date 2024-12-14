@@ -1,8 +1,8 @@
 import { ZodError } from "zod";
+import { NODE_ENV } from "./config";
+import { ErrorObject } from "@/types/error";
 
-export const normalizeError = (
-  error: unknown,
-): { message: string; statusCode: number } => {
+export const normalizeError = (error: unknown): ErrorObject => {
   if (error instanceof ZodError) {
     return {
       message: error.format()._errors.join(", "),
@@ -14,6 +14,7 @@ export const normalizeError = (
     return {
       message: error.message,
       statusCode: 500,
+      stack: NODE_ENV === "production" ? undefined : error.stack,
     };
   }
 

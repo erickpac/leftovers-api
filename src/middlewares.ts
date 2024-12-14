@@ -1,5 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { sendErrorResponse } from "@/common/responses/error";
+import { ZodSchema } from "zod";
+import { normalizeError } from "./utils/normalize-error";
 
 /**
  * Middleware to handle requests to routes that are not found.
@@ -44,9 +46,30 @@ export const errorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  const statusCode =
-    res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
-  const stack = process.env.NODE_ENV === "production" ? undefined : err.stack;
+  const { message, statusCode, stack } = normalizeError(err);
 
-  sendErrorResponse({ res, statusCode, message: err.message, stack });
+  return sendErrorResponse({ res, message, statusCode, stack });
 };
+
+/**
+ * Middleware factory that validates request body against a Zod schema.
+ *
+ * @param schema - The Zod schema to validate against
+ * @returns Express middleware function
+ *
+ * @example
+ * app.post('/users', validateBody(userSchema), createUser);
+ */
+export const validateBody =
+  (schema: ZodSchema) => (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const validatedData = schema.parse(req.body);
+      // Attach validated data to request for use in subsequent middlewares
+      req.body = validatedData;
+      next();
+    } catch (error) {
+      const { message, statusCode, stack } = normalizeError(error);
+
+      return sendErrorResponse({ res, message, statusCode, stack });
+    }
+  };
