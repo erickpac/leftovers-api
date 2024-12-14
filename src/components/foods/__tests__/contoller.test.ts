@@ -2,6 +2,7 @@ import request from "supertest";
 import express from "express";
 import * as controller from "../controller";
 import * as service from "../service";
+import { CustomError } from "@/common/custom/error";
 
 jest.mock("../service");
 
@@ -26,7 +27,9 @@ describe("Foods Controller", () => {
     });
 
     it("should return 404 if food item is not found", async () => {
-      (service.getFoodById as jest.Mock).mockResolvedValue(null);
+      (service.getFoodById as jest.Mock).mockRejectedValue(
+        new CustomError("Food item not found", 404),
+      );
 
       const response = await request(app).get("/foods/999");
 

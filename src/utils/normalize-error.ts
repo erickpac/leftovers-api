@@ -1,7 +1,7 @@
 import { ZodError } from "zod";
 import { NODE_ENV } from "./config";
 import { ErrorObject } from "@/types/error-object";
-import { CustomError } from "@/common/custom/custom-error";
+import { CustomError } from "@/common/custom/error";
 
 export const normalizeError = (error: unknown): ErrorObject => {
   if (error instanceof ZodError) {

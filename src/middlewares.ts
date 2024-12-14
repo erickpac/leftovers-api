@@ -2,7 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import { sendErrorResponse } from "@/common/responses/error";
 import { ZodSchema } from "zod";
 import { normalizeError } from "./utils/normalize-error";
-import { CustomError } from "@/common/custom/custom-error";
+import { CustomError } from "@/common/custom/error";
 
 /**
  * Middleware to handle requests to routes that are not found.

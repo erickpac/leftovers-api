@@ -1,3 +1,4 @@
+import { CustomError } from "@/common/custom/error";
 import * as service from "../service";
 import prisma from "@/database/client";
 
@@ -54,12 +55,10 @@ describe("Food Service", () => {
       });
     });
 
-    it("should return null if food item is not found", async () => {
+    it("should throw CustomError if food item is not found", async () => {
       (prisma.foodItem.findUnique as jest.Mock).mockResolvedValue(null);
 
-      const result = await service.getFoodById(999);
-
-      expect(result).toBeNull();
+      await expect(service.getFoodById(999)).rejects.toThrow(CustomError);
     });
 
     describe("getAverageRating", () => {

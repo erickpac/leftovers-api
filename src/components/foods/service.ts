@@ -1,5 +1,5 @@
 import prisma from "@/database/client";
-import { CustomError } from "@/common/custom/custom-error";
+import { CustomError } from "@/common/custom/error";
 
 export const getFoodById = async (id: number) => {
   return getFoodDetails(id);

@@ -3,7 +3,7 @@ import * as service from "./service";
 import { sendErrorResponse } from "@/common/responses/error";
 import { sendSuccessResponse } from "@/common/responses/success";
 import { normalizeError } from "@/utils/normalize-error";
-import { CustomError } from "@/common/custom/custom-error";
+import { CustomError } from "@/common/custom/error";
 
 export const getFoodById = async (req: Request, res: Response) => {
   try {
