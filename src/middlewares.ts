@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import { sendErrorResponse } from "@/common/responses/error";
 import { ZodSchema } from "zod";
 import { normalizeError } from "./utils/normalize-error";
+import { CustomError } from "@/common/custom/custom-error";
 
 /**
  * Middleware to handle requests to routes that are not found.
@@ -19,8 +20,7 @@ import { normalizeError } from "./utils/normalize-error";
  * app.use(notFound);
  */
 export const notFound = (req: Request, res: Response, next: NextFunction) => {
-  const error = new Error(`🔍 - not found - ${req.originalUrl}`);
-  res.status(404);
+  const error = new CustomError(`🔍 - not found - ${req.originalUrl}`, 404);
   next(error);
 };
 
@@ -47,9 +47,8 @@ export const errorHandler = (
   next: NextFunction,
 ) => {
   const { message, statusCode, stack } = normalizeError(err);
-  const status = res.statusCode ?? statusCode;
 
-  return sendErrorResponse({ res, message, statusCode: status, stack });
+  return sendErrorResponse({ res, message, statusCode, stack });
 };
 
 /**
