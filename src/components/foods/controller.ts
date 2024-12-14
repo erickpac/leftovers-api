@@ -7,14 +7,13 @@ import { z } from "zod";
 
 export const getFoodById = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const validId = z
-      .number({
-        message: "Invalid food ID format",
-      })
-      .parse(Number(id));
+    const idSchema = z.object({
+      id: z.string().transform((val) => Number(val)),
+    });
 
-    const foodItem = await service.getFoodById(validId);
+    const { id } = idSchema.parse(req.params);
+
+    const foodItem = await service.getFoodById(id);
 
     if (!foodItem) {
       return sendErrorResponse({
