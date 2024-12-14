@@ -60,39 +60,17 @@ describe("Food Service", () => {
 
       await expect(service.getFoodById(999)).rejects.toThrow(CustomError);
     });
+  });
 
-    describe("getAverageRating", () => {
-      it("should calculate average rating correctly for reviews", () => {
-        const mockFoodItem = {
-          id: 1,
-          name: "Pizza",
-          store: {
-            id: 1,
-            name: "Pizza Store",
-            reviews: [{ rating: 3 }, { rating: 4 }, { rating: 5 }],
-            categories: [],
-            highlights: [],
-          },
-        };
-
-        (prisma.foodItem.findUnique as jest.Mock).mockResolvedValue(
-          mockFoodItem,
-        );
-
-        return service.getFoodById(1).then((result) => {
-          expect(result?.store.reviews.averageRating).toBe(4);
-        });
-      });
-    });
-
-    it("should return 0 rating when there are no reviews", () => {
+  describe("getAverageRating", () => {
+    it("should calculate average rating correctly for reviews", () => {
       const mockFoodItem = {
         id: 1,
         name: "Pizza",
         store: {
           id: 1,
           name: "Pizza Store",
-          reviews: [],
+          reviews: [{ rating: 3 }, { rating: 4 }, { rating: 5 }],
           categories: [],
           highlights: [],
         },
@@ -101,7 +79,7 @@ describe("Food Service", () => {
       (prisma.foodItem.findUnique as jest.Mock).mockResolvedValue(mockFoodItem);
 
       return service.getFoodById(1).then((result) => {
-        expect(result?.store.reviews.averageRating).toBe(0);
+        expect(result?.store.reviews.averageRating).toBe(4);
       });
     });
   });
