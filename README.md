@@ -12,15 +12,14 @@ leftovers-api
 │   ├── schema.prisma           # Defines the Prisma schema for the database
 │   └── seeds.ts                # Script for seeding the database with initial data
 ├── src                         # Source code of the application
-│   ├── index.ts                # Main entry point of the application
 │   ├── app.ts                  # Sets up and configures the application
+│   ├── index.ts                # Main entry point of the application
 │   ├── middlewares.ts          # Custom middleware functions for the application
 │   ├── components              # Contains application components
-│   │   ├── index.ts            # Exports all component controllers
 │   │   ├── component           # Individual component controllers
 │   │   │   ├── controller.ts   # Contains the logic for a specific component
-│   │   │   ├── index.ts        # Exports component routes
-│   │   │   └── network.ts      # Sets up component routes
+│   │   │   ├── network.ts      # Sets up component routes
+│   │   │   └── service.ts      # Manages database queries
 │   ├── database                # Contains database configuration and setup files
 │   │   └── index.ts            # Initializes and configures the database connection
 │   ├── router                  # Contains route definitions
