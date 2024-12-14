@@ -63,8 +63,6 @@ export const validateBody =
       req.body = validatedData;
       next();
     } catch (error) {
-      const { message, statusCode, stack } = normalizeError(error);
-
-      return sendErrorResponse({ res, message, statusCode, stack });
+      next(error);
     }
   };
