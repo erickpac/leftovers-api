@@ -1,12 +1,14 @@
 import { Application, Router } from "express";
 import { router as UsersRouter } from "@/components/users/network";
 import { router as StoresRouter } from "@/components/stores/network";
+import { router as FoodsRouter } from "@/components/foods/network";
 import * as middleware from "@/middlewares";
 
 type Route = [string, Router];
 const routes: Route[] = [
   ["stores", StoresRouter],
   ["users", UsersRouter],
+  ["foods", FoodsRouter],
 ];
 
 /**

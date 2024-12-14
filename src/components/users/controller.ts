@@ -2,16 +2,16 @@ import type { Request, Response } from "express";
 import * as service from "./service";
 import { sendErrorResponse } from "@/common/responses/error";
 import { sendSuccessResponse } from "@/common/responses/success";
+import { normalizeError } from "@/utils/normalize-error";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
-    const users = await service.getAllUsers();
+    const users = await service.getUsers();
 
     sendSuccessResponse({ res, data: users });
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "An unknown error occurred";
+    const { message, statusCode } = normalizeError(error);
 
-    sendErrorResponse({ res, message });
+    return sendErrorResponse({ res, message, statusCode });
   }
 };

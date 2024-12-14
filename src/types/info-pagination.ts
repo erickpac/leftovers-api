@@ -1,4 +1,4 @@
-export default interface InfoPagination {
+export interface InfoPagination {
   totalItems: number;
   currentPage: number;
   totalPages: number;
