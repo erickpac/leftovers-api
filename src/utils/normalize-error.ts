@@ -1,12 +1,20 @@
 import { ZodError } from "zod";
 import { NODE_ENV } from "./config";
 import { ErrorObject } from "@/types/error-object";
+import { CustomError } from "@/common/custom/custom-error";
 
 export const normalizeError = (error: unknown): ErrorObject => {
   if (error instanceof ZodError) {
     return {
       message: error.format()._errors.join(", "),
       statusCode: 400,
+    };
+  }
+
+  if (error instanceof CustomError) {
+    return {
+      message: error.message,
+      statusCode: error.statusCode,
     };
   }
 

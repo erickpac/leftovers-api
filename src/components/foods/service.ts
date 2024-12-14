@@ -1,4 +1,5 @@
 import prisma from "@/database/client";
+import { CustomError } from "@/common/custom/custom-error";
 
 export const getFoodById = async (id: number) => {
   return getFoodDetails(id);
@@ -36,7 +37,7 @@ const getFoodDetails = async (id: number) => {
   });
 
   if (!foodItem) {
-    return null;
+    throw new CustomError("Food item not found", 404);
   }
 
   const averageRating = getAverageRating(foodItem.store.reviews);

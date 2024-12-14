@@ -3,6 +3,7 @@ import * as service from "./service";
 import { sendErrorResponse } from "@/common/responses/error";
 import { sendSuccessResponse } from "@/common/responses/success";
 import { normalizeError } from "@/utils/normalize-error";
+import { CustomError } from "@/common/custom/custom-error";
 
 export const getFoodById = async (req: Request, res: Response) => {
   try {
@@ -10,22 +11,10 @@ export const getFoodById = async (req: Request, res: Response) => {
     const parsedId = Number(id);
 
     if (isNaN(parsedId)) {
-      return sendErrorResponse({
-        res,
-        message: "Invalid food ID format",
-        statusCode: 400,
-      });
+      throw new CustomError("Invalid food ID format", 400);
     }
 
     const foodItem = await service.getFoodById(parsedId);
-
-    if (!foodItem) {
-      return sendErrorResponse({
-        res,
-        message: "Food item not found",
-        statusCode: 404,
-      });
-    }
 
     return sendSuccessResponse({ res, data: foodItem });
   } catch (error) {
