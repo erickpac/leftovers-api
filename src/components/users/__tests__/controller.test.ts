@@ -1,7 +1,7 @@
 import request from "supertest";
 import express from "express";
-import * as controller from "./controller";
-import * as service from "./service";
+import * as controller from "../controller";
+import * as service from "../service";
 
 jest.mock("./service");
 
