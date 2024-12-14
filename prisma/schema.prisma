@@ -25,7 +25,6 @@ model User {
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
 
-  // Relationships
   stores        Store[]
   orders        Order[]
   notifications Notification[]
@@ -34,8 +33,8 @@ model User {
 }
 
 model Store {
-  id           Int             @id @default(autoincrement())
-  owner        User            @relation(fields: [ownerId], references: [id])
+  id           Int      @id @default(autoincrement())
+  owner        User     @relation(fields: [ownerId], references: [id])
   ownerId      Int
   name         String
   description  String?
@@ -44,12 +43,14 @@ model Store {
   longitude    Float?
   contactEmail String?
   contactPhone String?
-  createdAt    DateTime        @default(now())
-  foodItems    FoodItem[]
-  reviews      Review[]
-  favorites    Favorite[]
-  categories   StoreCategory[]
-  highlights   Highlight[]
+  logo         String?
+  createdAt    DateTime @default(now())
+
+  foodItems  FoodItem[]
+  reviews    Review[]
+  favorites  Favorite[]
+  categories StoreCategory[]
+  highlights Highlight[]
 }
 
 model FoodItem {
@@ -58,13 +59,15 @@ model FoodItem {
   storeId       Int
   name          String
   description   String?
+  image         String?
   price         Float
   originalPrice Float?
   quantity      Int      @default(1)
   pickupStart   DateTime
   pickupEnd     DateTime
   createdAt     DateTime @default(now())
-  orders        Order[]
+
+  orders Order[]
 }
 
 model Order {
@@ -109,9 +112,10 @@ model Review {
 }
 
 model Category {
-  id              Int             @id @default(autoincrement())
-  name            String          @unique
-  createdAt       DateTime        @default(now())
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+
   storeCategories StoreCategory[]
 }
 

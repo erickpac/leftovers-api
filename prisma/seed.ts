@@ -35,6 +35,7 @@ async function main() {
       longitude: -74.006,
       contactEmail: "contact@bobsbakery.com",
       contactPhone: "123-456-7890",
+      logo: "https://static.vecteezy.com/system/resources/previews/005/293/951/non_2x/croissant-logo-template-suitable-for-restaurant-and-bakery-free-vector.jpg",
       owner: { connect: { email: "bob@example.com" } },
     },
   });
@@ -57,6 +58,7 @@ async function main() {
     data: {
       name: "Chocolate Croissant",
       description: "Delicious croissant filled with chocolate.",
+      image: "https://asset-prod.france.fr/bread_1284438_1920_1_ff0157080c.jpg",
       price: 2.5,
       originalPrice: 3.0,
       quantity: 20,
