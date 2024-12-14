@@ -21,7 +21,7 @@ leftovers-api
 │   │   │   ├── network.ts      # Sets up component routes
 │   │   │   └── service.ts      # Manages database queries
 │   ├── database                # Contains database configuration and setup files
-│   │   └── index.ts            # Initializes and configures the database connection
+│   │   └── client.ts           # Initializes and configures the database connection
 │   ├── router                  # Contains route definitions
 │   │   └── index.ts            # Main router setup
 │   └── types                   # Custom TypeScript types
