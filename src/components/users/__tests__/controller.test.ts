@@ -3,7 +3,7 @@ import express from "express";
 import * as controller from "../controller";
 import * as service from "../service";
 
-jest.mock("./service");
+jest.mock("../service");
 
 const app = express();
 app.get("/users", controller.getUsers);
