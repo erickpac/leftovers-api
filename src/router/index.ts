@@ -2,7 +2,8 @@ import { Application, Router } from "express";
 import { router as UsersRouter } from "@/components/users/network";
 import { router as StoresRouter } from "@/components/stores/network";
 import { router as FoodsRouter } from "@/components/foods/network";
-import * as middleware from "@/middlewares";
+import { notFound } from "@/middlewares/not-found";
+import { errorHandler } from "@/middlewares/error-handler";
 
 type Route = [string, Router];
 const routes: Route[] = [
@@ -23,8 +24,8 @@ export const setRoutes = (app: Application) => {
   const router = Router();
 
   app.use("/api/v1", router);
-  app.use(middleware.notFound);
-  app.use(middleware.errorHandler);
+  app.use(notFound);
+  app.use(errorHandler);
 
   routes.forEach(([path, route]) => {
     router.use(`/${path}`, route);
