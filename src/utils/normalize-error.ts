@@ -4,9 +4,12 @@ import { ErrorObject } from "@/types/error-object";
 import { CustomError } from "@/common/custom/error";
 
 export const normalizeError = (error: unknown): ErrorObject => {
+  const isProduction = NODE_ENV === "production";
+
   if (error instanceof ZodError) {
     return {
-      message: error.format()._errors.join(", "),
+      message: "Invalid request data",
+      errors: error.errors,
       statusCode: 400,
     };
   }
@@ -15,7 +18,7 @@ export const normalizeError = (error: unknown): ErrorObject => {
     return {
       message: error.message,
       statusCode: error.statusCode,
-      stack: NODE_ENV === "production" ? undefined : error.stack,
+      stack: isProduction ? undefined : error.stack,
     };
   }
 
@@ -23,7 +26,7 @@ export const normalizeError = (error: unknown): ErrorObject => {
     return {
       message: error.message,
       statusCode: 500,
-      stack: NODE_ENV === "production" ? undefined : error.stack,
+      stack: isProduction ? undefined : error.stack,
     };
   }
 
