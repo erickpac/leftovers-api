@@ -34,8 +34,8 @@ describe("Foods Controller", () => {
       const response = await request(app).get("/foods/999");
 
       expect(response.status).toBe(404);
-      expect(response.body).toHaveProperty("error");
-      expect(response.body.error).toBe("Food item not found");
+      expect(response.body).toHaveProperty("message");
+      expect(response.body.message).toBe("Food item not found");
     });
 
     it("should return 500 if there is a server error", async () => {
@@ -46,16 +46,16 @@ describe("Foods Controller", () => {
       const response = await request(app).get("/foods/1");
 
       expect(response.status).toBe(500);
-      expect(response.body).toHaveProperty("error");
-      expect(response.body.error).toBe("Server error");
+      expect(response.body).toHaveProperty("message");
+      expect(response.body.message).toBe("Server error");
     });
 
     it("should return 400 if the id is not a number", async () => {
       const response = await request(app).get("/foods/abc");
 
       expect(response.status).toBe(400);
-      expect(response.body).toHaveProperty("error");
-      expect(response.body.error).toBe("Invalid food ID format");
+      expect(response.body).toHaveProperty("message");
+      expect(response.body.message).toBe("Invalid food ID format");
     });
   });
 });

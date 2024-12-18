@@ -34,7 +34,7 @@ describe("Users Controller", () => {
       const response = await request(app).get("/users");
 
       expect(response.status).toBe(500);
-      expect(response.body).toEqual({ error: errorMessage });
+      expect(response.body).toEqual({ message: errorMessage });
     });
   });
 });
