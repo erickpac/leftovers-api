@@ -9,8 +9,8 @@ export const normalizeError = (error: unknown): ErrorObject => {
   if (error instanceof ZodError) {
     return {
       message: "Invalid request data",
-      errors: error.errors,
       statusCode: 400,
+      errors: error.errors,
     };
   }
 
