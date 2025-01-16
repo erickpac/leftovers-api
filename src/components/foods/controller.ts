@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import * as service from "./service";
 import { sendErrorResponse } from "@/common/responses/error";
 import { sendSuccessResponse } from "@/common/responses/success";
-import { normalizeError } from "@/utils/normalize-error";
+import { normalizeError } from "@/lib/normalize-error";
 import { CustomError } from "@/common/custom/error";
 
 export const getFoodById = async (req: Request, res: Response) => {

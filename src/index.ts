@@ -1,5 +1,5 @@
 import { app } from "@/app";
-import { PORT } from "@/utils/config";
+import { PORT } from "@/lib/config";
 
 app
   .listen(PORT, () => {

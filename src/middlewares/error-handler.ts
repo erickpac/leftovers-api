@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { sendErrorResponse } from "@/common/responses/error";
-import { normalizeError } from "@/utils/normalize-error";
+import { normalizeError } from "@/lib/normalize-error";
 
 /**
  * Middleware to handle errors in the application.
