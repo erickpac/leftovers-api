@@ -51,11 +51,15 @@ describe("Foods Controller", () => {
     });
 
     it("should return 400 if the id is not a number", async () => {
+      (service.getFoodById as jest.Mock).mockRejectedValue(
+        new CustomError("Invalid ID format", 400),
+      );
+
       const response = await request(app).get("/foods/abc");
 
       expect(response.status).toBe(400);
       expect(response.body).toHaveProperty("message");
-      expect(response.body.message).toBe("Invalid food ID format");
+      expect(response.body.message).toBe("Invalid ID format");
     });
   });
 });

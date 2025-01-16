@@ -6,19 +6,21 @@ import type { Response } from "express";
  *
  * @param res - The response object.
  * @param status - The HTTP status code for the success response (default is 200).
- * @param info - The optional info message to be included in the response.
+ * @param message - The message to be included in the response.
  * @param data - The data to be included in the response.
+ * @param info - The optional info message to be included in the response.
  * @returns The response object with the success details.
  */
 export const sendSuccessResponse = ({
   res,
   status = 200,
-  info,
+  message,
   data,
+  info,
 }: SuccessResponse): Response => {
   if (info) {
-    return res.status(status).json({ info, data });
+    return res.status(status).json({ info, data, message });
   }
 
-  return res.status(status).json({ data });
+  return res.status(status).json({ data, message });
 };
