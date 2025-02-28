@@ -3,7 +3,7 @@ import { NODE_ENV } from "./config";
 import { ErrorObject } from "@/types/error-object";
 import { CustomError } from "@/common/custom/error";
 
-export const normalizeError = (error: unknown): ErrorObject => {
+export const handleError = (error: unknown): ErrorObject => {
   const isProduction = NODE_ENV === "production";
 
   if (error instanceof ZodError) {

@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { sendErrorResponse } from "@/common/responses/error";
-import { normalizeError } from "@/lib/normalize-error";
+import { handleError } from "@/lib/error-handler";
 
 /**
  * Middleware to handle errors in the application.
@@ -24,7 +24,7 @@ export const errorHandler = (
   res: Response,
   next: NextFunction,
 ) => {
-  const { message, statusCode, errors, stack } = normalizeError(error);
+  const { message, statusCode, errors, stack } = handleError(error);
 
   return sendErrorResponse({ res, message, statusCode, errors, stack });
 };
